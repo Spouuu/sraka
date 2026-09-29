@@ -1,3 +1,58 @@
-<h1>Butter Empire</h1>
-<button name="kupJedenButter" (click)="kupButter()">Butter Kup 1</button>
-<h3>Licznik butter: {{licznikButter}}</h3>
+<div class="game">
+
+  <div class="header">
+    <h1>Butter Empire</h1>
+    <p>Build your butter empire</p>
+  </div>
+
+  <div class="main-button">
+    <p>YOUR BUTTER</p>
+    <strong>{{licznikButter}}</strong>
+
+<button (click)="buyButterJeden()">
+  MAKE BUTTER
+</button>
+
+  </div>
+
+  <div class="upgrades">
+
+<div class="upgrade">
+  <label>10 Butter</label>
+  <button
+    name="betterButter"
+    (click)="buyBetterButter()"
+    [disabled]="licznikButter < 10">
+    Better Butter (+0.25)
+  </button>
+</div>
+
+<div class="upgrade">
+  <label>50 Butter</label>
+  <button
+    name="goldenButter"
+    (click)="buyGoldenButter()"
+    [disabled]="licznikButter < 50">
+    Golden Butter (+1.0)
+  </button>
+</div>
+
+
+  </div>
+  <div class="stats">
+    <div class="stat">
+      <span>Mnożnik Butter</span>
+      <strong>{{mnoznikButter | number:'1.1-1'}}x</strong>
+    </div>
+    <div class="progress">
+  <p>Progress to Golden Butter</p>
+
+  <div class="progress-bar">
+      <div class="progress-fill" [style.width.%]="(licznikButter / 50)*100"></div>
+  </div>
+
+    <span>{{licznikButter}} / 50 Butter</span>
+  </div> 
+  </div>
+
+</div>
