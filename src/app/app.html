@@ -2,48 +2,59 @@
 
   <div class="header">
     <h1>Butter Empire</h1>
-    <p>Build your butter empire</p>
   </div>
 
+  <div class="inline">
+
   <div class="main-button">
+    <div class="multiplier">
+      <span>Butter Multiplier</span>
+      <strong>{{mnoznikButter | number:'1.1-1'}}x</strong>
+    </div>
     <p>YOUR BUTTER</p>
     <strong>{{licznikButter}}</strong>
-
-<button (click)="buyButterJeden()">
-  MAKE BUTTER
-</button>
+    <button (click)="buyButterJeden()">
+      MAKE BUTTER
+    </button>
+  </div>
 
   </div>
 
   <div class="upgrades">
 
-<div class="upgrade">
-  <label>10 Butter</label>
-  <button
-    name="betterButter"
-    (click)="buyBetterButter()"
-    [disabled]="licznikButter < 10">
-    Better Butter (+0.25)
-  </button>
-</div>
+  <div class="upgrade">
+    <label>10 Butter</label>
+    <button
+      name="betterButter"
+      (click)="buyBetterButter()"
+      [disabled]="licznikButter < 10">
+      Better Butter (+0.25)
+    </button>
+  </div>
 
-<div class="upgrade">
-  <label>50 Butter</label>
-  <button
-    name="goldenButter"
-    (click)="buyGoldenButter()"
-    [disabled]="licznikButter < 50">
-    Golden Butter (+1.0)
-  </button>
-</div>
+  <div class="upgrade">
+    <label>50 Butter</label>
+    <button
+      name="goldenButter"
+      (click)="buyGoldenButter()"
+      [disabled]="licznikButter < 50">
+      Golden Butter (+1.0)
+    </button>
+  </div>
+
+  <div class="upgrade">
+    <label>100 Butter</label>
+    <button
+      name="autoButter"
+      (click)="autoButter()"
+      [disabled]="licznikButter < 100 || autoclicker">
+      AutoButter
+    </button>
+  </div>
 
 
   </div>
   <div class="stats">
-    <div class="stat">
-      <span>Mnożnik Butter</span>
-      <strong>{{mnoznikButter | number:'1.1-1'}}x</strong>
-    </div>
     <div class="progress">
   <p>Progress to Golden Butter</p>
 
