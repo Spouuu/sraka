@@ -13,47 +13,89 @@
     </div>
     <p>YOUR BUTTER</p>
     <strong>{{licznikButter}}</strong>
+       @if (criticalMessage) {
+      <div class="critical-container">
+        <div class="critical">
+          CRITICAL!
+          <span>+{{ criticalAmount }} BUTTER</span>
+        </div>
+      </div>
+    }
+
     <button (click)="buyButterJeden()">
       MAKE BUTTER
     </button>
   </div>
 
   </div>
-
   <div class="upgrades">
 
-  <div class="upgrade">
-    <label>10 Butter</label>
-    <button
-      name="betterButter"
-      (click)="buyBetterButter()"
-      [disabled]="licznikButter < 10">
-      Better Butter (+0.25)
-    </button>
+    <div class="upgrade">
+      <label>10 Butter</label>
+
+      <button
+        name="betterButter"
+        (click)="buyBetterButter()"
+        [disabled]="licznikButter < 10 || clickMultiplier > 1">
+
+        Better Butter (x2 Click)
+
+      </button>
+    </div>
+
+    <div class="upgrade">
+      <label>50 Butter</label>
+
+      <button
+        name="goldenButter"
+        (click)="buyGoldenButter()"
+        [disabled]="licznikButter < 50 || clickMultiplier > 2">
+
+        Golden Butter (x4 Click)
+
+      </button>
+    </div>
+
+    <div class="upgrade">
+      <label>100 Butter</label>
+
+      <button
+        name="autoButter"
+        (click)="autoButter()"
+        [disabled]="licznikButter < 100 || autoclicker">
+
+        AutoButter
+
+      </button>
+    </div>
+
+    <div class="upgrade">
+      <label>500 Butter</label>
+
+      <button
+        name="betterAutoButter"
+        (click)="betterAutoButter()"
+        [disabled]="licznikButter < 500 || !autoclicker || autoButterMultiplier > 1">
+
+        Better AutoButter (2x Speed)
+
+      </button>
+    </div>
+
+    <div class="upgrade">
+      <label>10,000 Butter</label>
+
+      <button
+        name="megaButter"
+        (click)="buyMegaButter()"
+        [disabled]="licznikButter < 10000 || megaButterMultiplier > 1">
+
+        MEGA BUTTER (x2 Multiplier)
+
+      </button>
+    </div>
   </div>
 
-  <div class="upgrade">
-    <label>50 Butter</label>
-    <button
-      name="goldenButter"
-      (click)="buyGoldenButter()"
-      [disabled]="licznikButter < 50">
-      Golden Butter (+1.0)
-    </button>
-  </div>
-
-  <div class="upgrade">
-    <label>100 Butter</label>
-    <button
-      name="autoButter"
-      (click)="autoButter()"
-      [disabled]="licznikButter < 100 || autoclicker">
-      AutoButter
-    </button>
-  </div>
-
-
-  </div>
   <div class="stats">
     <div class="progress">
   <p>Progress to Golden Butter</p>
