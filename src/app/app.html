@@ -83,6 +83,32 @@
     </div>
 
     <div class="upgrade">
+      <label>1,500 Butter</label>
+
+      <button
+        name="butterFactory"
+        (click)="buyButterFactory()"
+        [disabled]="licznikButter < 1500 || !autoclicker || autoButterMultiplier === 1 || butterFactory">
+
+        Butter Factory (+5 butter)
+
+      </button>
+    </div>
+
+    <div class="upgrade">
+      <label>3,000 Butter</label>
+
+      <button
+        name="goldenCow"
+        (click)="buyGoldenCow()"
+        [disabled]="licznikButter < 3000 || goldenCow">
+
+        Golden Cow (2x AutoButter)
+
+      </button>
+    </div>
+
+    <div class="upgrade">
       <label>10,000 Butter</label>
 
       <button
@@ -98,14 +124,23 @@
 
   <div class="stats">
     <div class="progress">
-  <p>Progress to Golden Butter</p>
 
-  <div class="progress-bar">
-      <div class="progress-fill" [style.width.%]="(licznikButter / 50)*100"></div>
-  </div>
+      <p>
+        Progress to {{ getNextUpgrade().name }}
+      </p>
 
-    <span>{{licznikButter}} / 50 Butter</span>
-  </div> 
-  </div>
+      <div class="progress-bar">
+        <div
+          class="progress-fill"
+          [style.width.%]="getProgress()">
+        </div>
+      </div>
+
+      <span>
+        {{ licznikButter }} / {{ getNextUpgrade().cost }} Butter
+      </span>
+
+    </div>
+</div>
 
 </div>

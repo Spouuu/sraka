@@ -24,10 +24,54 @@ export class App {
   criticalMessage = false;
   criticalAmount = 0;
 
+  butterFactory = false;
+  goldenCow = false;
+
   constructor(
     private cdr: ChangeDetectorRef,
     private ngZone: NgZone
   ) {}
+
+  getNextUpgrade() {
+
+  if (this.clickMultiplier === 1) {
+    return { name: 'Better Butter', cost: 10 };
+  }
+
+  if (this.clickMultiplier === 2) {
+    return { name: 'Golden Butter', cost: 50 };
+  }
+
+  if (!this.autoclicker) {
+    return { name: 'AutoButter', cost: 100 };
+  }
+
+  if (this.autoButterMultiplier === 1) {
+    return { name: 'Better AutoButter', cost: 500 };
+  }
+
+  if (!this.butterFactory) {
+    return { name: 'Butter Factory', cost: 1500 };
+  }
+
+  if (!this.goldenCow) {
+    return { name: 'Golden Cow', cost: 3000 };
+  }
+
+  if (this.megaButterMultiplier === 1) {
+    return { name: 'MEGA BUTTER', cost: 10000 };
+  }
+
+  return { name: 'MAXIMUM BUTTER', cost: 10000 };
+}
+
+
+  getProgress() {
+    const progress = (this.licznikButter / this.getNextUpgrade().cost) * 100;
+
+    return Math.min(progress, 100);
+  }
+
 
   buyBetterButter() {
     if (this.licznikButter < 10 || this.clickMultiplier > 1) return;
@@ -85,19 +129,22 @@ export class App {
 
   startAutoButter() {
 
-    this.autoclickerInterval = setInterval(() => {
+  this.autoclickerInterval = setInterval(() => {
 
-      let butter = Math.floor(this.mnoznikButter);
+    let butter = Math.floor(this.mnoznikButter);
 
-      butter = butter * this.megaButterMultiplier;
+    if (this.goldenCow) {
+      butter = butter * 2;
+    }
 
-      this.licznikButter += butter;
+    butter = butter * this.megaButterMultiplier;
 
-      this.cdr.detectChanges();
+    this.licznikButter += butter;
 
-    }, 1000 / this.autoButterMultiplier);
-  }
+    this.cdr.detectChanges();
 
+  }, 1000 / this.autoButterMultiplier);
+}
   betterAutoButter() {
 
     if (
@@ -115,6 +162,18 @@ export class App {
     this.startAutoButter();
   }
 
+  buyButterFactory() {
+    if (this.licznikButter < 1500 || this.butterFactory) return;
+
+    this.licznikButter -= 1500;
+    this.butterFactory = true;
+
+    setInterval(() => {
+      this.licznikButter += 5;
+      this.cdr.detectChanges();
+    }, 1000);
+  }
+
   buyMegaButter() {
 
     if (
@@ -125,4 +184,15 @@ export class App {
     this.licznikButter -= 10000;
     this.megaButterMultiplier = 2;
   }
+
+  buyGoldenCow() {
+
+  if (
+    this.licznikButter < 3000 ||
+    this.goldenCow
+  ) return;
+
+  this.licznikButter -= 3000;
+  this.goldenCow = true;
+}
 }
